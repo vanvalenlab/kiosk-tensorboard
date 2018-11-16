@@ -8,4 +8,6 @@ ENV GKE_BUCKET="default-bucket"
 
 ENV LOG_PREFIX="tensorboard_logs"
 
-ENTRYPOINT [ "bin/entrypoint.sh" ]
+COPY bin/entrypoint.sh /bin/entrypoint.sh
+
+ENTRYPOINT [ "/bin/entrypoint.sh" ]
