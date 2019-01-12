@@ -19,5 +19,5 @@ jobs:
       - docker build -t "$TRAVIS_REPO_SLUG" .
       - docker images
       - docker tag "$TRAVIS_REPO_SLUG" "$TRAVIS_REPO_SLUG":latest
-      - if [ "$TRAVIS_BRANCH" != "master"] ; then docker tag "$TRAVIS_REPO_SLUG" "$TRAVIS_REPO_SLUG":"${"$TRAVIS_BRANCH":1}" ; fi
+      - if [ "$TRAVIS_BRANCH" != "master" ] ; then docker tag "$TRAVIS_REPO_SLUG" "$TRAVIS_REPO_SLUG":"${"$TRAVIS_BRANCH":1}" ; fi
       - docker push "$TRAVIS_REPO_SLUG"
