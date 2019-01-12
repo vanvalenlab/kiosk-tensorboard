@@ -4,11 +4,10 @@ dist: trusty
 git:
   depth: false
 
-# safelist
-branches:
-  only:
-  - master
-  - /^r[0-9]+.[0-9]+
+# Only deploy if master branch or like a release
+stages:
+  - name: deploy
+    if: branch = master OR branch =~ ^r[0-9]+.[0-9]+
 
 jobs:
   include:
