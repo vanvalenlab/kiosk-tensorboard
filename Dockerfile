@@ -1,4 +1,6 @@
-FROM tensorflow/tensorflow:1.11.0
+# Build arg to easily change base image
+ARG TF_VERSION=1.11.0
+FROM tensorflow/tensorflow:${TF_VERSION}
 
 ENV CLOUD_PROVIDER="aws"
 

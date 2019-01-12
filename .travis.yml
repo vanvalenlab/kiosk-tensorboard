@@ -1,0 +1,22 @@
+sudo: false
+dist: trusty
+
+git:
+  depth: false
+
+# safelist
+branches:
+  only:
+  - master
+  - /^r[0-9]+.[0-9]+
+
+jobs:
+  include:
+    - stage: deploy
+      script:
+      - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
+      - docker build -t "$TRAVIS_REPO_SLUG" .
+      - docker images
+      - docker tag "$TRAVIS_REPO_SLUG" "$TRAVIS_REPO_SLUG":latest
+      - if [[ "$TRAVIS_BRANCH" != "master" ]] ; then docker tag "$TRAVIS_REPO_SLUG" "$TRAVIS_REPO_SLUG":"${TRAVIS_BRANCH#r}" ; fi
+      - docker push "$TRAVIS_REPO_SLUG"
